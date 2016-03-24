@@ -1,9 +1,7 @@
 import scala.io.Source
 
-var myList = Source.fromFile("graph").getLines().map(line => line.split("
-")(1)).toList
+var myList = Source.fromFile("graph").getLines().map(line => line.split(" ")(1)).toList
 
 for ( a <- myList  ) {
     println(myList.count( _ == a  ))
-
 }
