@@ -1,3 +1,10 @@
+*.swo
+*.swp
+
+datatrim
+derby.log
+metastore_db
+
 # Object files
 *.o
 *.ko
