@@ -1,0 +1,11 @@
+import scala.io.Source
+
+def readFile() : Iterator[Array[String]] = {
+    return Source.fromFile("data_input").getLines().map(line => line.split("\t"))
+}
+
+def addEdge(edge : Array[String]) : Int = {
+    return 0
+}
+
+var iter = readFile().foreach(addEdge)
