@@ -1,7 +1,15 @@
 import scala.io.Source
 
-var myList = Source.fromFile("graph").getLines().map(line => line.split(" ")(1)).toList
+def task1() : Int = {
+    var myList = Source.fromFile("data_input").getLines().map(line => line.split("\t")(1)).toList
 
-for ( a <- myList  ) {
-    println(myList.count( _ == a  ))
+    var result = 0
+    for ( a <- myList  ) {
+        if (myList.count( _ == a  ) > result) {
+            result = myList.count(_ == a)
+        }
+    }
+    return result
 }
+
+val result = task1()
