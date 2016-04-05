@@ -1,0 +1,38 @@
+import scala.io.Source
+
+class Graph() {
+    var edges : Set[(Int, Int)] = Set()
+
+    def addDirectedEdge(s: Int, e: Int) {
+        edges += ((s, e))
+    }
+}
+
+def readFile() : Iterator[Array[String]] = {
+    return Source.fromFile("graph").getLines().map(line => line.split(" "))
+}
+
+var graph = new Graph()
+
+def addEdge(edge : Array[String]) {
+    graph.addDirectedEdge(edge(0).toInt, edge(1).toInt)
+}
+
+readFile().foreach(addEdge)
+
+var result :Map[Int, List[Int]] = Map()
+result = result ++ graph.edges.groupBy(_._1).map{ case (key, value) => (key,
+value.map(_._2).toList) }
+
+var max = 0
+for( (k,v) <- res ) {
+    if (v.length > max) max = v.length;
+}
+
+print (max)
+
+for( (k,v) <- result ) {
+    if (v.length < max) result = result -- ((k,v));
+}
+
+print(result)
