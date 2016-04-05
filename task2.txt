@@ -1,31 +1,11 @@
 import scala.io.Source
 
-class Node(val id: Int) {
-    var neighbours: List[Node] = List()
-
-    def newNeighbour(n: Node) {
-        neighbours = neighbours :+ n
-    }
-    
-    def 
-}
-
 class Graph() {
-    var nodes : List[Node] = List()
+    var edges : Set[(Int, Int)] = Set()
 
-    def getNode(id: Int) : Node = {
-        for (node <- nodes) {
-            if (node.id == id) return node;
-        }
-        var node = new Node(id)
-        nodes = nodes :+ node
-        return node
-    }
-    
-    def printNodes() {
-        for(node <- nodes) {
-            println(node.id)
-        }
+    def addUndirectedEdge(s: Int, e: Int) {
+        edges += ((s, e))
+        edges += ((e, s))
     }
 }
 
@@ -36,16 +16,15 @@ def readFile() : Iterator[Array[String]] = {
 var graph = new Graph()
 
 def addEdge(edge : Array[String]) {
-    var node1 = graph.getNode(edge(0).toInt)
-    var node2 = graph.getNode(edge(1).toInt)
-    node1.newNeighbour(node2)
-    node2.newNeighbour(node1)
+    graph.addUndirectedEdge(edge(0).toInt, edge(1).toInt)
 }
 
 readFile().foreach(addEdge)
 
-var result = Map()
+var result = graph.edges.groupBy(_._1).map{ case (key, value) => (key,
+value.map(_._2).toList) }
+//for( (k,v) <- result ) {
+//    print("Key: " + k + " " + "Value: " +  v + "\n")
+//}
 
-for(node <- graph.nodes) {
-    result = result :+ (node -> node.neighbours.toArray)
-}
+//println (result.size)
