@@ -3,6 +3,7 @@ val edges = lines.map(_.split("\t"))
 
 val undir = edges.collect{ case Array(s: String, e: String) => (s, e)}
 val result = undir.groupByKey().map{ case Tuple2(k, v) => (k,
-v.toSet.toList)}.reduce{  }
+v.toSet.toList)}.reduce{ (max :Tuple2[String, List[String]], cur :Tuple2[String,
+List[String]]) => if (cur._2.length > max._2.length) cur else max }
 
 println(result.sortByKey().count)
