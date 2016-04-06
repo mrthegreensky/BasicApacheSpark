@@ -2,4 +2,7 @@ val lines = sc.textFile("data_input")
 val edges = lines.map(_.split("\t"))
 
 val undir = edges.collect{ case Array(s: String, e: String) => (s, e)}
-undir.keyBy()
+val pairs = undir.cartesian(undir).filter{ case ((s1, e1), (s2, e2)) => 
+    (e1 == s2 || (s2 == s1 && e1 == e2))}
+
+val result = pairs.map{ case((s1, e1), (s2, e2)) => (s1, e2) }

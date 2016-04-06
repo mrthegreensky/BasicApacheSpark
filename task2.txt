@@ -3,5 +3,3 @@ val edges = lines.map(_.split("\t")).flatMap{e => Array(e, e.reverse)}
 
 val undir = edges.collect{ case Array(s: String, e: String) => (s, e)}
 val result = undir.groupByKey().map{ case Tuple2(k, v) => (k, v.toSet.toList)}
-
-result.sortByKey().saveAsTextFile("data_output")

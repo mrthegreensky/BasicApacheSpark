@@ -2,5 +2,5 @@ val lines = sc.textFile("data_input")
 val innodes = lines.map(line => line.split("\t")(1))
 val cluster = innodes.map(node => (node, 1))
 val nodeCount = cluster.reduceByKey(_ + _)
-val result = nodeCount.reduce{ (max: Tuple2[String, Int], cur: Tuple2[String, Int]) => 
+val result = nodeCount.reduce{(max:Tuple2[String,Int], cur:Tuple2[String,Int])=>
     if (cur._2 > max._2) cur else max }._2
