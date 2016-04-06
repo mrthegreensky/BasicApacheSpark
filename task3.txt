@@ -1,0 +1,8 @@
+val lines = sc.textFile("data_input")
+val edges = lines.map(_.split("\t"))
+
+val undir = edges.collect{ case Array(s: String, e: String) => (s, e)}
+val result = undir.groupByKey().map{ case Tuple2(k, v) => (k,
+v.toSet.toList)}.reduce{  }
+
+println(result.sortByKey().count)
