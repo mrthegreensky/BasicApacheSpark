@@ -5,4 +5,4 @@ val undir = edges.collect{ case Array(s: String, e: String) => (s, e)}
 val res = undir.groupByKey().map{ case Tuple2(k, v) => (k, v.toSet.toList)}
 val max = res.reduce{(max,cur) => 
     if (cur._2.length > max._2.length) cur else max }._2.length
-val result = res.filter{ _._2.length == max }
+val result = res.filter{ _._2.length == max }.map{ case (k, v) => k }
