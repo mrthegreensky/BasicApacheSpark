@@ -1,0 +1,5 @@
+val lines = sc.textFile("data_input")
+val edges = lines.map(_.split("\t"))
+
+val undir = edges.collect{ case Array(s: String, e: String) => (s, e)}
+undir.keyBy()
