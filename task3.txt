@@ -9,7 +9,7 @@ class Graph() {
 }
 
 def readFile() : Iterator[Array[String]] = {
-    return Source.fromFile("graph").getLines().map(line => line.split(" "))
+    return Source.fromFile("data_input").getLines().map(line => line.split("\t"))
 }
 
 var graph = new Graph()
@@ -18,21 +18,19 @@ def addEdge(edge : Array[String]) {
     graph.addDirectedEdge(edge(0).toInt, edge(1).toInt)
 }
 
-readFile().foreach(addEdge)
+def task2() : Map[Int, List[Int]] = {
+    readFile().foreach(addEdge)
 
-var result :Map[Int, List[Int]] = Map()
-result = result ++ graph.edges.groupBy(_._1).map{ case (key, value) => (key,
-value.map(_._2).toList) }
+    var res :Map[Int, List[Int]] = Map()
+    res = res ++ graph.edges.groupBy(_._1).map{ case (key, value) => (key,
+    value.map(_._2).toList) }
 
-var max = 0
-for( (k,v) <- res ) {
-    if (v.length > max) max = v.length;
+    var max = 0
+    for( (k,v) <- res ) {
+        if (v.length > max) max = v.length;
+    }
+
+    res.filter(_._2.size == max)
 }
 
-print (max)
-
-for( (k,v) <- result ) {
-    if (v.length < max) result = result -- ((k,v));
-}
-
-print(result)
+var result = task2()
